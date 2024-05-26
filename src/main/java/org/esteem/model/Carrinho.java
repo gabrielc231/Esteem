@@ -2,11 +2,11 @@ package org.esteem.model;
 
 import java.util.ArrayList;
 
-public class ProdutosLoja {
+public class Carrinho {
     ArrayList<Produto> produtos;
-    
-    public ProdutosLoja() {
-        produtos =  new ArrayList<>();
+
+    public Carrinho() {
+        produtos = new ArrayList<>();
     }
 
     public Produto addProduto(Produto novo) {
@@ -24,5 +24,13 @@ public class ProdutosLoja {
 
     public ArrayList<Produto> getProdutos() {
         return produtos;
+    }
+
+    public int getCusto() {
+        int custo = 0;
+        for (Produto item : produtos) {
+            custo += item.getPreco();
+        }
+        return custo;
     }
 }
