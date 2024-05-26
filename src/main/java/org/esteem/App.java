@@ -1,7 +1,6 @@
 package org.esteem;
 import java.util.Scanner;
 
-import org.esteem.view.LojaView;
 
 public class App 
 {
