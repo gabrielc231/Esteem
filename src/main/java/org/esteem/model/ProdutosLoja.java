@@ -9,20 +9,20 @@ public class ProdutosLoja {
         produtos =  new ArrayList<>();
     }
 
-    public Produto addProduto(Produto novo) {
+    public Produto add(Produto novo) {
         produtos.add(novo);
 
         return novo;
     }
 
-    public Produto removeProduto(Produto removido) {
+    public Produto remove(Produto removido) {
         Produto temp = removido;
         produtos.remove(removido);
 
         return temp;
     }
 
-    public ArrayList<Produto> getProdutos() {
+    public ArrayList<Produto> get() {
         return produtos;
     }
 }

@@ -9,13 +9,13 @@ public class Carrinho {
         produtos = new ArrayList<>();
     }
 
-    public Produto addProduto(Produto novo) {
+    public Produto add(Produto novo) {
         produtos.add(novo);
 
         return novo;
     }
 
-    public Produto removeProduto(Produto removido) {
+    public Produto remove(Produto removido) {
         Produto temp = removido;
         produtos.remove(removido);
 
