@@ -6,11 +6,13 @@ public class Cliente {
     private int id;
     private String nome;
     private Biblioteca biblioteca;
+    private Biblioteca MyGames= new Biblioteca();
 
-    public Cliente(int id, String nome, Biblioteca biblioteca) {
+    public Cliente(int id, String nome, Biblioteca biblioteca, Biblioteca MyGames) {
         this.id = id;
         this.nome = nome;
         this.biblioteca = biblioteca;
+        this.MyGames = MyGames;
     }
 
     @Override
@@ -25,6 +27,9 @@ public class Cliente {
 
     public ArrayList<Produto> getProdutosDisponiveis() {
         return biblioteca.getProdutos();
+    }
+    public ArrayList<Produto> getMyProdutos() {
+        return MyGames.getProdutos();
     }
 
     public void setId(int id) {
@@ -42,6 +47,8 @@ public class Cliente {
     public void addProduto(Produto produto) {
         biblioteca.add(produto);
     }
-    
+    public void addMyProduto(Produto produto) {
+        MyGames.add(produto);
+    }
 
 }
