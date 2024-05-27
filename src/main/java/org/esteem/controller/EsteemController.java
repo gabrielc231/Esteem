@@ -22,7 +22,7 @@ public class EsteemController {
     public static int requestNewId() {
         return nextId++;
     }
-
+    
     public void modoDevMenu(DeveloperView developerView, Cliente Cliente, Loja loja, Biblioteca myGames) {
         developerView.clearInterface();
         while(true){
