@@ -36,7 +36,7 @@ public class LojaView implements AppView {
         
     }
 
-    public void showProducts(ArrayList produtos) {
+    public void showProdutos(ArrayList produtos) {
         for(Object produto : produtos) {
             System.out.println(produto);
         }
