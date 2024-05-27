@@ -1,6 +1,7 @@
 package org.esteem.controller;
 
 import org.esteem.model.Cliente;
+import org.esteem.model.Loja;
 import org.esteem.model.Produto;
 import org.esteem.model.Bibloteca;
 import org.esteem.view.DeveloperView;
@@ -8,39 +9,39 @@ import org.esteem.view.DeveloperView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.jdi.DoubleValue;
+
 public class EsteemController {
     private static int nextId = 1;
-    private List<Produto> store;
-    private List<Produto> clientes;
 
     public EsteemController() {
-        this.store = new ArrayList<Produto>();
-        this.clientes = new ArrayList<Produto>();
+        
     }
     public void ModoDeve(){
-        ModoDeveMenu();
+        //ModoDeveMenu();
     }
 
     public static int requestNewId() {
         return nextId++;
     }
 
-    public void ModoDeveMenu(DeveloperView developerView,Cliente Cliente){
+    public void ModoDeveMenu(DeveloperView developerView,Cliente Cliente,Loja Loja){
         developerView.clearInterface();
         while(true){
-            developerView.showDeveOptions();
-            int imput=developerView.getDeveInput();
+            developerView.showOptions();
+            int imput=developerView.getUserInput();
             switch(imput){
                 case 1:
                     developerView.clearInterface();
                     developerView.GameName();
-                    String name = developerView.getDeveInputName();
+                    String name = developerView.getDevInputName();
                     developerView.GamePrice();
-                    int price = developerView.getDeveInputprice();
+                    int price = developerView.getDevInputprice();
                     int Id = requestNewId();
                     String Deve = Cliente.getNome();
                     Produto game = new Produto(Id, name, Deve, price);
-                    //add loja
+                    Loja.add(game);
+                    evaluateGame(game);
                     Cliente.addMyProduto(game);
                     developerView.clearInterface();
                     break;
@@ -51,7 +52,36 @@ public class EsteemController {
                     developerView.showMyProducts(MyGames);
                     break;
                 case 3:
-                    //mudar jogo
+                    developerView.clearInterface();
+                    developerView.JogoAtualizada();
+                    developerView.GameName();
+                    String nome = developerView.getDevInputName();
+                    while(true){
+                        switch(imput){
+                            case 1:
+                                developerView.clearInterface();
+                                developerView.GameName();
+                                developerView.getDevInputName();
+                                //Mudar nome
+                                break;
+                            case 2:
+                                developerView.clearInterface();
+                                developerView.GamePrice();
+                                developerView.getDevInputPrice();
+                                break;
+                            case 3:
+                                
+                                Loja.remove(removido)
+                                break;
+                            case 4:
+                                developerView.clearInterface();
+                                developerView.SairModoJogo();
+                                return;
+                            default:
+                                developerView.clearInterface();
+                                developerView.ErroEntrada();
+                        }
+                    }
                 case 4:
                     developerView.clearInterface();
                     developerView.SairDeve();
@@ -66,36 +96,5 @@ public class EsteemController {
     }
     public boolean evaluateGame(Produto game) {
         return true; // Simulated game evaluation, always returns true (game approved)
-    }
-
-    public boolean addGameToStore(Produto game) {
-        game.setId(requestNewId());
-        return store.add(game); // Add the game to the store
-    }
-
-    public List<Jogo> getStore() {
-        return store;
-    }
-
-    public boolean loginUser(String name) {
-        for (Cliente cliente : clientes) {
-            if (cliente.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Cliente getClienteByName(String name) {
-        for (Cliente cliente : clientes) {
-            if (cliente.getName().equals(name)) {
-                return cliente;
-            }
-        }
-        return null;
-    }
-
-    public void addCliente(Cliente cliente) {
-        clientes.add(cliente);
     }
 }
