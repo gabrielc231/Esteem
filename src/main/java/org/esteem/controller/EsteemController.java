@@ -7,7 +7,6 @@ import org.esteem.model.Biblioteca;
 import org.esteem.view.DeveloperView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class EsteemController {
@@ -24,7 +23,7 @@ public class EsteemController {
         return nextId++;
     }
 
-    public void ModoDeveMenu(DeveloperView developerView,Cliente Cliente,Loja Loja){
+    public void ModoDeveMenu(DeveloperView developerView,Cliente Cliente,Loja loja,Biblioteca myGames){
         developerView.clearInterface();
         while(true){
             developerView.showOptions();
@@ -39,7 +38,7 @@ public class EsteemController {
                     int Id = requestNewId();
                     String Deve = Cliente.getNome();
                     Produto game = new Produto(Id, name, Deve, price);
-                    Loja.add(game);
+                    loja.add(game);
                     evaluateGame(game);
                     Cliente.addMyProduto(game);
                     break;
@@ -52,25 +51,33 @@ public class EsteemController {
                 case 3:
                     developerView.clearInterface();
                     String nome;
+                    Produto produto;
+                    Produto produtoMy;
                     while(true){
                         developerView.JogoAtualizada();
-                        developerView.JogoAtualizada();
                         nome = developerView.getDevInputName();
+                        produto = loja.findByNome(nome);
+                        produtoMy = myGames.findByNome(nome);
                         switch(imput){
                             case 1:
                                 developerView.clearInterface();
                                 developerView.GameName();
-                                developerView.getDevInputName();
-                                //Mudar nome
+                                nome=developerView.getDevInputName();
+                                produto.setNome(nome);
+                                produtoMy.setNome(nome);
                                 break;
                             case 2:
                                 developerView.clearInterface();
                                 developerView.GamePrice();
                                 developerView.getDevInputPrice();
+                                price=developerView.getDevInputPrice();
+                                produto.setPreco(price);
+                                produtoMy.setPreco(price);
+
                                 break;
                             case 3:
-                                
-                                Loja.remove(nome);
+                                loja.remove(produto);
+                                myGames.remove(produtoMy);
                                 break;
                             case 4:
                                 developerView.clearInterface();

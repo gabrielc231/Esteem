@@ -17,7 +17,7 @@ public class DeveloperView implements AppView{
         System.out.println("Selecione uma das Opções:");
         System.out.println("1: colocar jogo");
         System.out.println("2: Mostrar Meus jogos");
-        System.out.println("3: Atualiasr jogo");
+        System.out.println("3: Atualizar jogo");
         System.out.println("4: sair do modo desenvolvedor");
     }
 
@@ -37,10 +37,10 @@ public class DeveloperView implements AppView{
 
     }
     public void GameName(){
-        System.out.println("Nome do Jogo\n");
+        System.out.println("Nome do Jogo?\n");
     }
     public void GamePrice(){
-        System.out.println("Preso do Jogo\n");
+        System.out.println("Preso do Jogo?\n");
     }
 
     public void showMyProducts(ArrayList produtos) {
