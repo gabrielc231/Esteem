@@ -2,10 +2,10 @@ package org.esteem.model;
 
 import java.util.ArrayList;
 
-public class Biblioteca {
+public class Loja {
     private ArrayList<Produto> produtos;
 
-    public Biblioteca() {
+    public Loja() {
         produtos = new ArrayList<>();
     }
 
@@ -37,7 +37,7 @@ public class Biblioteca {
         }
         return null;
     }
-
+    
     public ArrayList<Produto> getProdutos() {
         return produtos;
     }
