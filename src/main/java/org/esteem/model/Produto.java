@@ -1,15 +1,21 @@
 package org.esteem.model;
 
 public class Produto {
-    int id;
-    String nome;
-    String autor;
-    int preco;
+    private int id;
+    private String nome;
+    private String autor;
+    private int preco;
+
+    public Produto(int id,String nome, String autor, int preco) {
+        this.id = id;
+        this.nome = nome;
+        this.autor = autor;
+        this.preco = preco;
+    }
 
     @Override
     public String toString() {
-        return "\nNome:"+nome+
-               "\nautor:"+autor;
+        return nome;
     }
 
     public int getId() {

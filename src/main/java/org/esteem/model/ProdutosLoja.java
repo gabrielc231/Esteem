@@ -3,7 +3,7 @@ package org.esteem.model;
 import java.util.ArrayList;
 
 public class ProdutosLoja {
-    ArrayList<Produto> produtos;
+    private ArrayList<Produto> produtos;
     
     public ProdutosLoja() {
         produtos =  new ArrayList<>();
