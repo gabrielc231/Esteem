@@ -3,13 +3,12 @@ package org.esteem.controller;
 import org.esteem.model.Cliente;
 import org.esteem.model.Loja;
 import org.esteem.model.Produto;
-import org.esteem.model.Bibloteca;
+import org.esteem.model.Biblioteca;
 import org.esteem.view.DeveloperView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.jdi.DoubleValue;
 
 public class EsteemController {
     private static int nextId = 1;
@@ -36,14 +35,13 @@ public class EsteemController {
                     developerView.GameName();
                     String name = developerView.getDevInputName();
                     developerView.GamePrice();
-                    int price = developerView.getDevInputprice();
+                    int price = developerView.getDevInputPrice();
                     int Id = requestNewId();
                     String Deve = Cliente.getNome();
                     Produto game = new Produto(Id, name, Deve, price);
                     Loja.add(game);
                     evaluateGame(game);
                     Cliente.addMyProduto(game);
-                    developerView.clearInterface();
                     break;
                 case 2:
                     developerView.clearInterface();
@@ -53,10 +51,11 @@ public class EsteemController {
                     break;
                 case 3:
                     developerView.clearInterface();
-                    developerView.JogoAtualizada();
-                    developerView.GameName();
-                    String nome = developerView.getDevInputName();
+                    String nome;
                     while(true){
+                        developerView.JogoAtualizada();
+                        developerView.JogoAtualizada();
+                        nome = developerView.getDevInputName();
                         switch(imput){
                             case 1:
                                 developerView.clearInterface();
@@ -71,11 +70,10 @@ public class EsteemController {
                                 break;
                             case 3:
                                 
-                                Loja.remove(removido)
+                                Loja.remove(nome);
                                 break;
                             case 4:
                                 developerView.clearInterface();
-                                developerView.SairModoJogo();
                                 return;
                             default:
                                 developerView.clearInterface();
@@ -84,7 +82,7 @@ public class EsteemController {
                     }
                 case 4:
                     developerView.clearInterface();
-                    developerView.SairDeve();
+                    developerView.SairDev();
                     return;
                 default:
                     developerView.clearInterface();
