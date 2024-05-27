@@ -70,6 +70,10 @@ public class DeveloperView implements AppView{
         sc.close();
         return input;
     }
+    public void JogoAtualizada(){
+        System.out.println("Nome do jogo a ser modificado");
+    }
+
     public void ErroEntrada(){
         System.out.println("Entrada inválida");
     }
