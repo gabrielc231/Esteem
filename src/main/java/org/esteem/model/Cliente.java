@@ -6,13 +6,19 @@ public class Cliente {
     private int id;
     private String nome;
     private Biblioteca biblioteca;
-    private Biblioteca MyGames= new Biblioteca();
+    private Biblioteca MyGames;
 
     public Cliente(int id, String nome, Biblioteca biblioteca, Biblioteca MyGames) {
         this.id = id;
         this.nome = nome;
         this.biblioteca = biblioteca;
         this.MyGames = MyGames;
+    }
+    public Cliente(int id, String nome, Biblioteca biblioteca) {
+        this.id = id;
+        this.nome = nome;
+        this.biblioteca = biblioteca;
+        this.MyGames = new Biblioteca();
     }
 
     @Override
