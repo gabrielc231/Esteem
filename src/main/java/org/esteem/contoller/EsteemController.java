@@ -1,62 +1,76 @@
 package org.esteem.controller;
 
 import org.esteem.model.Cliente;
-import org.esteem.model.Jogo;
+import org.esteem.model.Produto;
+import org.esteem.model.Bibloteca;
+import org.esteem.view.DeveloperView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EsteemController {
     private static int nextId = 1;
-    private List<Jogo> store;
-    private List<Cliente> clientes;
+    private List<Produto> store;
+    private List<Produto> clientes;
 
     public EsteemController() {
-        this.store = new ArrayList<Jogo>();
-        this.clientes = new ArrayList<Cliente>();
+        this.store = new ArrayList<Produto>();
+        this.clientes = new ArrayList<Produto>();
+    }
+    public void ModoDeve(){
+        ModoDeveMenu();
     }
 
     public static int requestNewId() {
         return nextId++;
     }
 
-    public boolean evaluateGame(Jogo game) {
+    public void ModoDeveMenu(DeveloperView developerView,Cliente Cliente){
+        developerView.clearInterface();
+        while(true){
+            developerView.showDeveOptions();
+            int imput=developerView.getDeveInput();
+            switch(imput){
+                case 1:
+                    developerView.clearInterface();
+                    developerView.GameName();
+                    String name = developerView.getDeveInputName();
+                    developerView.GamePrice();
+                    int price = developerView.getDeveInputprice();
+                    int Id = requestNewId();
+                    String Deve = Cliente.getNome();
+                    Produto game = new Produto(Id, name, Deve, price);
+                    //add loja
+                    Cliente.addMyProduto(game);
+                    developerView.clearInterface();
+                    break;
+                case 2:
+                    developerView.clearInterface();
+                    ArrayList<Produto> MyGames = Cliente.getMyProdutos();
+                    developerView.clearInterface();
+                    developerView.showMyProducts(MyGames);
+                    break;
+                case 3:
+                    //mudar jogo
+                case 4:
+                    developerView.clearInterface();
+                    developerView.SairDeve();
+                    return;
+                default:
+                    developerView.clearInterface();
+                    developerView.ErroEntrada();
+            }
+        }
+    }
+    public void addProduto(){
+    }
+    public boolean evaluateGame(Produto game) {
         return true; // Simulated game evaluation, always returns true (game approved)
     }
 
-    public boolean addGameToStore(Jogo game) {
+    public boolean addGameToStore(Produto game) {
         game.setId(requestNewId());
         return store.add(game); // Add the game to the store
-    }
-
-    public List<String> viewMyGames(String userName) {
-        List<String> myGames = new ArrayList<String>();
-        for (Jogo jogo : store) {
-            if (jogo.getDeveloperName().equals(userName)) {
-                myGames.add("ID: " + jogo.getId() + ", Name: " + jogo.getName() + ", Price: $" + jogo.getPrice());
-            }
-        }
-        return myGames;
-    }
-
-    public List<String> viewAllGames() {
-        List<String> allGames = new ArrayList<String>();
-        for (Jogo jogo : store) {
-            allGames.add("ID: " + jogo.getId() + ", Name: " + jogo.getName() + ", Developer: " + jogo.getDeveloperName() + ", Price: $" + jogo.getPrice());
-        }
-        return allGames;
-    }
-
-    public String getSuccessMessage() {
-        return "The game has been successfully added to the store!";
-    }
-
-    public String getDenialMessage() {
-        return "The publication of the game has been denied.";
-    }
-
-    public String getErrorMessage() {
-        return "Error adding the game to the store.";
     }
 
     public List<Jogo> getStore() {
