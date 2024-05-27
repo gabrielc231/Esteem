@@ -20,6 +20,12 @@ public class Cliente {
         this.biblioteca = biblioteca;
         this.MyGames = new Biblioteca();
     }
+    public Cliente(int id, String nome) {
+        this.id = id;
+        this.nome = nome;
+        this.biblioteca = new Biblioteca();
+        this.MyGames = new Biblioteca();
+    }
 
     @Override
     public String toString() {
