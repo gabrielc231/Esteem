@@ -1,12 +1,12 @@
 package org.esteem.controller;
 
+import java.util.ArrayList;
+
+import org.esteem.model.Biblioteca;
 import org.esteem.model.Cliente;
 import org.esteem.model.Loja;
 import org.esteem.model.Produto;
-import org.esteem.model.Biblioteca;
 import org.esteem.view.DeveloperView;
-
-import java.util.ArrayList;
 
 
 public class EsteemController {
@@ -23,24 +23,24 @@ public class EsteemController {
         return nextId++;
     }
 
-    public void ModoDeveMenu(DeveloperView developerView,Cliente Cliente,Loja loja,Biblioteca myGames){
+    public void modoDevMenu(DeveloperView developerView, Cliente Cliente, Loja loja, Biblioteca myGames) {
         developerView.clearInterface();
         while(true){
             developerView.showOptions();
-            int imput=developerView.getUserInput();
-            switch(imput){
+            int input = developerView.getUserInput();
+            switch(input){
                 case 1:
                     developerView.clearInterface();
-                    developerView.GameName();
+                    developerView.displayAskName();
                     String name = developerView.getDevInputName();
-                    developerView.GamePrice();
+                    developerView.displayAskPrice();
                     int price = developerView.getDevInputPrice();
                     int Id = requestNewId();
-                    String Deve = Cliente.getNome();
-                    Produto game = new Produto(Id, name, Deve, price);
+                    String Dev = Cliente.getNome();
+                    Produto game = new Produto(Id, name, Dev, price);
                     loja.add(game);
                     evaluateGame(game);
-                    Cliente.addMyProduto(game);
+                    myGames.add(game);
                     break;
                 case 2:
                     developerView.clearInterface();
@@ -54,21 +54,21 @@ public class EsteemController {
                     Produto produto;
                     Produto produtoMy;
                     while(true){
-                        developerView.JogoAtualizada();
+                        developerView.displayAskNameModified();
                         nome = developerView.getDevInputName();
                         produto = loja.findByNome(nome);
                         produtoMy = myGames.findByNome(nome);
-                        switch(imput){
+                        switch(input){
                             case 1:
                                 developerView.clearInterface();
-                                developerView.GameName();
+                                developerView.displayAskName();
                                 nome=developerView.getDevInputName();
                                 produto.setNome(nome);
                                 produtoMy.setNome(nome);
                                 break;
                             case 2:
                                 developerView.clearInterface();
-                                developerView.GamePrice();
+                                developerView.displayAskPrice();
                                 developerView.getDevInputPrice();
                                 price=developerView.getDevInputPrice();
                                 produto.setPreco(price);
@@ -84,16 +84,16 @@ public class EsteemController {
                                 return;
                             default:
                                 developerView.clearInterface();
-                                developerView.ErroEntrada();
+                                developerView.displayInputError();
                         }
                     }
                 case 4:
                     developerView.clearInterface();
-                    developerView.SairDev();
+                    developerView.exitDev();
                     return;
                 default:
                     developerView.clearInterface();
-                    developerView.ErroEntrada();
+                    developerView.displayInputError();
             }
         }
     }

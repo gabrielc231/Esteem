@@ -36,11 +36,11 @@ public class DeveloperView implements AppView{
         return input;
 
     }
-    public void GameName(){
+    public void displayAskName() {
         System.out.println("Nome do Jogo?\n");
     }
-    public void GamePrice(){
-        System.out.println("Preso do Jogo?\n");
+    public void displayAskPrice() {
+        System.out.println("Preço do Jogo?\n");
     }
 
     public void showMyProducts(ArrayList produtos) {
@@ -70,14 +70,14 @@ public class DeveloperView implements AppView{
         sc.close();
         return input;
     }
-    public void JogoAtualizada(){
+    public void displayAskNameModified(){
         System.out.println("Nome do jogo a ser modificado");
     }
 
-    public void ErroEntrada(){
+    public void displayInputError(){
         System.out.println("Entrada inválida");
     }
-    public void SairDev(){
+    public void exitDev(){
         System.out.println("Saindo do modo desenvolvedor");
     }
 }
