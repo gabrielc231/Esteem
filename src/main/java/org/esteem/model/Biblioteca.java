@@ -2,10 +2,10 @@ package org.esteem.model;
 
 import java.util.ArrayList;
 
-public class Carrinho {
+public class Biblioteca {
     private ArrayList<Produto> produtos;
 
-    public Carrinho() {
+    public Biblioteca() {
         produtos = new ArrayList<>();
     }
 
@@ -24,13 +24,5 @@ public class Carrinho {
 
     public ArrayList<Produto> getProdutos() {
         return produtos;
-    }
-
-    public int getCusto() {
-        int custo = 0;
-        for (Produto item : produtos) {
-            custo += item.getPreco();
-        }
-        return custo;
     }
 }
