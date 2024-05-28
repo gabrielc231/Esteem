@@ -1,20 +1,32 @@
 package org.esteem.view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+
 public class DeveloperView implements AppView{
 
     @Override
-    public void clearInterface(){
-        System.out.print("\033c");
+    public void clearInterface() {
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            }
+            else {
+                Runtime.getRuntime().exec("clear");
+            }
+        } catch (IOException | InterruptedException ex) {
+            System.out.println("Não pode limpar a tela");
+        }
+
     }
 
     @Override
     public void showOptions() {
         System.out.println("Modo Desenvolvedor\n");
-        System.out.println("Selecione uma das Opções:");
+        System.out.println("Selecione uma das Opcoes:");
         System.out.println("1: Colocar jogo na Loja");
         System.out.println("2: Mostrar Meus jogos");
         System.out.println("3: Atualizar jogo");
@@ -30,7 +42,7 @@ public class DeveloperView implements AppView{
 
         }
         catch(InputMismatchException | NumberFormatException ex) {
-            System.out.println("Número de opção inválida");
+            System.out.println("Numero de opcao invalida");
         }
 
         return input;
@@ -40,7 +52,7 @@ public class DeveloperView implements AppView{
         System.out.println("Nome do Jogo?\n");
     }
     public void displayAskPrice() {
-        System.out.println("Preço do Jogo?\n");
+        System.out.println("Preco do Jogo?\n");
     }
 
     public void showMyProducts(ArrayList produtos) {
@@ -49,33 +61,34 @@ public class DeveloperView implements AppView{
         }
 
     }
-    public String getDevInputName(){
+    public String getDevInputName() {
         String input = "";
         Scanner sc = new Scanner(System.in);
         input = sc.nextLine();
-        sc.close();
         return input;
     }
-    public int getDevInputPrice(){
+    public int getDevInputPrice() {
         Scanner sc = new Scanner(System.in);
         int input = 0;
-        while(true) {
             try {
                 input = Integer.parseInt(sc.nextLine());
-                break;
             }catch (NumberFormatException e){
-                System.out.println("Número de opção inválida");
+                System.out.println("Numero de opção invalida");
             }
-        }
-        sc.close();
         return input;
     }
+
+    public void getAnyInput() {
+        Scanner sc = new Scanner(System.in);
+        sc.nextLine();
+    }
+
     public void displayAskNameModified(){
         System.out.println("Nome do jogo a ser modificado");
     }
 
     public void displayInputError(){
-        System.out.println("Entrada inválida");
+        System.out.println("Entrada invalida");
     }
     public void exitDevMode(){
         System.out.println("Saindo do Modo Desenvolvedor");

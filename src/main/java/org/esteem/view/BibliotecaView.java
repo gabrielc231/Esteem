@@ -1,14 +1,26 @@
 package org.esteem.view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 
 public class BibliotecaView implements AppView {
 
     @Override
     public void clearInterface(){
-        System.out.print("\033c");
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            }
+            else {
+                Runtime.getRuntime().exec("clear");
+            }
+        } catch (IOException | InterruptedException ex) {
+            System.out.println("Não pode limpar a tela");
+        }
+
     }
 
     @Override
@@ -30,7 +42,7 @@ public class BibliotecaView implements AppView {
 
         }
         catch(InputMismatchException | NumberFormatException ex) {
-            System.out.println("Número de opção inválida");
+            System.out.println("Numero de opção invalida");
         }
 
         return input;
@@ -50,12 +62,16 @@ public class BibliotecaView implements AppView {
         String input = "";
         Scanner sc = new Scanner(System.in);
         input = sc.nextLine();
-        sc.close();
         return input;
     }
 
+    public  void getAnyInput() {
+        Scanner sc = new Scanner(System.in);
+        sc.nextLine();
+    }
+
     public void displayInputError(){
-        System.out.println("Entrada inválida");
+        System.out.println("Entrada invalida");
     }
     public void enterDevMode(){
         System.out.println("Entrando no Modo Desenvolvedor");

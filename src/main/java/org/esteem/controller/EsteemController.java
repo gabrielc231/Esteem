@@ -2,7 +2,6 @@ package org.esteem.controller;
 
 import java.util.ArrayList;
 
-import org.esteem.model.Biblioteca;
 import org.esteem.model.Cliente;
 import org.esteem.model.Loja;
 import org.esteem.model.Produto;
@@ -20,9 +19,7 @@ public class EsteemController {
         return nextId++;
     }
 
-    public void bibliotecaMenu()
-
-    public void modoDevMenu(DeveloperView developerView, Cliente Cliente, Loja loja, Biblioteca myGames) {
+    public void modoDevMenu(DeveloperView developerView, Cliente cliente, Loja loja) {
         developerView.clearInterface();
         while(true){
             developerView.showOptions();
@@ -35,17 +32,17 @@ public class EsteemController {
                     developerView.displayAskPrice();
                     int price = developerView.getDevInputPrice();
                     int Id = requestNewId();
-                    String Dev = Cliente.getNome();
+                    String Dev = cliente.getNome();
                     Produto game = new Produto(Id, name, Dev, price);
-                    loja.add(game);
                     evaluateProduto(game);
-                    myGames.add(game);
+                    loja.add(game);
+                    cliente.addMyProduto(game);
                     break;
                 case 2:
                     developerView.clearInterface();
-                    ArrayList<Produto> MyGames = Cliente.getMyProdutos();
-                    developerView.clearInterface();
-                    developerView.showMyProducts(MyGames);
+                    ArrayList<Produto> myGames = cliente.getMyProdutos();
+                    developerView.showMyProducts(myGames);
+                    developerView.getAnyInput();
                     break;
                 case 3:
                     developerView.clearInterface();
@@ -56,7 +53,7 @@ public class EsteemController {
                         developerView.displayAskNameModified();
                         nome = developerView.getDevInputName();
                         produto = loja.findByNome(nome);
-                        produtoMy = myGames.findByNome(nome);
+                        produtoMy = cliente.getMyGames().findByNome(nome);
                         switch(input){
                             case 1:
                                 developerView.clearInterface();
@@ -76,7 +73,7 @@ public class EsteemController {
                                 break;
                             case 3:
                                 loja.remove(produto);
-                                myGames.remove(produtoMy);
+                                cliente.removeMyProduto(produtoMy);
                                 break;
                             case 4:
                                 developerView.clearInterface();

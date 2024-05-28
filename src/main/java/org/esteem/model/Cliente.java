@@ -6,25 +6,25 @@ public class Cliente {
     private int id;
     private String nome;
     private Biblioteca biblioteca;
-    private Biblioteca MyGames;
+    private Biblioteca myGames;
 
     public Cliente(int id, String nome, Biblioteca biblioteca, Biblioteca MyGames) {
         this.id = id;
         this.nome = nome;
         this.biblioteca = biblioteca;
-        this.MyGames = MyGames;
+        this.myGames = MyGames;
     }
     public Cliente(int id, String nome, Biblioteca biblioteca) {
         this.id = id;
         this.nome = nome;
         this.biblioteca = biblioteca;
-        this.MyGames = new Biblioteca();
+        this.myGames = new Biblioteca();
     }
     public Cliente(int id, String nome) {
         this.id = id;
         this.nome = nome;
         this.biblioteca = new Biblioteca();
-        this.MyGames = new Biblioteca();
+        this.myGames = new Biblioteca();
     }
 
     @Override
@@ -41,7 +41,7 @@ public class Cliente {
         return biblioteca.getProdutos();
     }
     public ArrayList<Produto> getMyProdutos() {
-        return MyGames.getProdutos();
+        return myGames.getProdutos();
     }
 
     public void setId(int id) {
@@ -56,11 +56,20 @@ public class Cliente {
         this.nome = nome;
     }
 
+    public Biblioteca getMyGames() {
+        return myGames;
+    }
+
     public void addProduto(Produto produto) {
         biblioteca.add(produto);
     }
     public void addMyProduto(Produto produto) {
-        MyGames.add(produto);
+        myGames.add(produto);
     }
 
+    public Produto removeMyProduto(Produto produto) {
+        Produto temp = produto;
+        myGames.remove(produto);
+        return temp;
+    }
 }
