@@ -15,14 +15,13 @@ public class EsteemController {
     public EsteemController() {
         
     }
-    public void ModoDeve(){
-        //ModoDeveMenu();
-    }
 
     public static int requestNewId() {
         return nextId++;
     }
-    
+
+    public void bibliotecaMenu()
+
     public void modoDevMenu(DeveloperView developerView, Cliente Cliente, Loja loja, Biblioteca myGames) {
         developerView.clearInterface();
         while(true){
@@ -39,7 +38,7 @@ public class EsteemController {
                     String Dev = Cliente.getNome();
                     Produto game = new Produto(Id, name, Dev, price);
                     loja.add(game);
-                    evaluateGame(game);
+                    evaluateProduto(game);
                     myGames.add(game);
                     break;
                 case 2:
@@ -89,7 +88,7 @@ public class EsteemController {
                     }
                 case 4:
                     developerView.clearInterface();
-                    developerView.exitDev();
+                    developerView.exitDevMode();
                     return;
                 default:
                     developerView.clearInterface();
@@ -99,7 +98,7 @@ public class EsteemController {
     }
     public void addProduto(){
     }
-    public boolean evaluateGame(Produto game) {
-        return true; // Simulated game evaluation, always returns true (game approved)
+    public boolean evaluateProduto(Produto produto) {
+        return true; // Simulação da avaliação do jogo, sempre retorna verdadeiro
     }
 }

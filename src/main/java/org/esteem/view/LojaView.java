@@ -17,7 +17,8 @@ public class LojaView implements AppView {
         System.out.println("Selecione uma das Opções:");
         System.out.println("1: Comprar jogo");
         System.out.println("2: Mostrar jogos disponíveis");
-        System.out.println("3: Ir para biblioteca");
+        System.out.println("3: Entrar na Biblioteca");
+        System.out.println("4: Entrar no Modo Desenvolvedor");
     }
 
     @Override
@@ -43,7 +44,12 @@ public class LojaView implements AppView {
 
     }
 
-   
-    
+    public void displayInputError(){
+        System.out.println("Entrada inválida");
+    }
+
+    public void enterDevMode(){
+        System.out.println("Entrando no Modo Desenvolvedor");
+    }
 
 }

@@ -13,12 +13,12 @@ public class DeveloperView implements AppView{
 
     @Override
     public void showOptions() {
-        System.out.println("Modo desenvolvedor\n");
+        System.out.println("Modo Desenvolvedor\n");
         System.out.println("Selecione uma das Opções:");
-        System.out.println("1: colocar jogo");
+        System.out.println("1: Colocar jogo na Loja");
         System.out.println("2: Mostrar Meus jogos");
         System.out.println("3: Atualizar jogo");
-        System.out.println("4: sair do modo desenvolvedor");
+        System.out.println("4: Sair do Modo Desenvolvedor");
     }
 
     @Override
@@ -77,8 +77,8 @@ public class DeveloperView implements AppView{
     public void displayInputError(){
         System.out.println("Entrada inválida");
     }
-    public void exitDev(){
-        System.out.println("Saindo do modo desenvolvedor");
+    public void exitDevMode(){
+        System.out.println("Saindo do Modo Desenvolvedor");
     }
 }
 

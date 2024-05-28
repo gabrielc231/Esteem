@@ -39,9 +39,6 @@ public class BibliotecaView implements AppView {
     public void displayAskName() {
         System.out.println("Nome do Jogo?\n");
     }
-    public void displayAskPrice() {
-        System.out.println("Preço do Jogo?\n");
-    }
 
     public void showMyProducts(ArrayList produtos) {
         for(Object produto : produtos) {
@@ -56,29 +53,12 @@ public class BibliotecaView implements AppView {
         sc.close();
         return input;
     }
-    public int getDevInputPrice(){
-        Scanner sc = new Scanner(System.in);
-        int input = 0;
-        while(true) {
-            try {
-                input = Integer.parseInt(sc.nextLine());
-                break;
-            }catch (NumberFormatException e){
-                System.out.println("Número de opção inválida");
-            }
-        }
-        sc.close();
-        return input;
-    }
-    public void displayAskNameModified(){
-        System.out.println("Nome do jogo a ser modificado");
-    }
 
     public void displayInputError(){
         System.out.println("Entrada inválida");
     }
-    public void exitDev(){
-        System.out.println("Saindo do modo desenvolvedor");
+    public void enterDevMode(){
+        System.out.println("Entrando no Modo Desenvolvedor");
     }
 }
 
