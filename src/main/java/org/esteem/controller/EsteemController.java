@@ -2,99 +2,117 @@ package org.esteem.controller;
 
 import java.util.ArrayList;
 
+import org.esteem.model.Biblioteca;
+import org.esteem.model.Carrinho;
 import org.esteem.model.Cliente;
 import org.esteem.model.Loja;
 import org.esteem.model.Produto;
-import org.esteem.view.DeveloperView;
+import org.esteem.view.AppView;
 
 
 public class EsteemController {
-    private static int nextId = 1;
+    private AppView view;
+    private Carrinho carrinho;
+    private Biblioteca biblioteca;
+    private Cliente cliente;
+    private Biblioteca myGames;
+    private Loja loja;
+    private int nextId;
 
-    public EsteemController() {
-        
+    public EsteemController(AppView view) {
+        nextId = 0;
+        this.view = view;
     }
 
-    public static int requestNewId() {
+    public EsteemController() {
+        nextId = 0;
+    }
+
+    public EsteemController(Cliente c, Loja l) {
+        nextId = 0;
+        setCliente(c);
+        setLoja(l);
+    }
+
+    public int requestNewId() {
         return nextId++;
     }
 
-    public void modoDevMenu(DeveloperView developerView, Cliente cliente, Loja loja) {
-        developerView.clearInterface();
-        while(true){
-            developerView.showOptions();
-            int input = developerView.getUserInput();
-            switch(input){
-                case 1:
-                    developerView.clearInterface();
-                    developerView.displayAskName();
-                    String name = developerView.getDevInputName();
-                    developerView.displayAskPrice();
-                    int price = developerView.getDevInputPrice();
-                    int Id = requestNewId();
-                    String Dev = cliente.getNome();
-                    Produto game = new Produto(Id, name, Dev, price);
-                    evaluateProduto(game);
-                    loja.add(game);
-                    cliente.addMyProduto(game);
-                    break;
-                case 2:
-                    developerView.clearInterface();
-                    ArrayList<Produto> myGames = cliente.getMyProdutos();
-                    developerView.showMyProducts(myGames);
-                    developerView.getAnyInput();
-                    break;
-                case 3:
-                    developerView.clearInterface();
-                    String nome;
-                    Produto produto;
-                    Produto produtoMy;
-                    while(true){
-                        developerView.displayAskNameModified();
-                        nome = developerView.getDevInputName();
-                        produto = loja.findByNome(nome);
-                        produtoMy = cliente.getMyGames().findByNome(nome);
-                        switch(input){
-                            case 1:
-                                developerView.clearInterface();
-                                developerView.displayAskName();
-                                nome=developerView.getDevInputName();
-                                produto.setNome(nome);
-                                produtoMy.setNome(nome);
-                                break;
-                            case 2:
-                                developerView.clearInterface();
-                                developerView.displayAskPrice();
-                                developerView.getDevInputPrice();
-                                price=developerView.getDevInputPrice();
-                                produto.setPreco(price);
-                                produtoMy.setPreco(price);
+    public void setLoja(Loja l) {
+        loja = l;
+    }
 
-                                break;
-                            case 3:
-                                loja.remove(produto);
-                                cliente.removeMyProduto(produtoMy);
-                                break;
-                            case 4:
-                                developerView.clearInterface();
-                                return;
-                            default:
-                                developerView.clearInterface();
-                                developerView.displayInputError();
-                        }
-                    }
-                case 4:
-                    developerView.clearInterface();
-                    developerView.exitDevMode();
-                    return;
-                default:
-                    developerView.clearInterface();
-                    developerView.displayInputError();
-            }
-        }
+    public void setCliente(Cliente c) {
+        cliente = c;
+        carrinho = cliente.getCarrinho();
+        myGames = cliente.getMyGames();
     }
-    public void addProduto(){
+
+    public String getClienteNome() {
+        return cliente.getNome();
     }
+
+    public Produto createProduto(String nome, int preco) {
+        Produto novo = new Produto(nextId,nome,cliente.getNome(),preco);
+        myGames.add(novo);
+        return loja.add(novo);
+    }
+
+    public Produto createProduto(Produto produto) {
+        return loja.add(produto);
+    }
+
+    public Produto updateProduto(String nomeProduto, String nome) {
+        Produto atualizado = loja.findByNome(nomeProduto);
+        atualizado.setNome(nome);
+        return atualizado;
+    }
+
+    public Produto addProdutoBiblioteca(Produto produto) {
+        return biblioteca.add(produto);
+    }
+
+    public Produto addProdutoLoja(Produto produto) {
+        return createProduto(produto);
+    }
+
+    public Produto searchProdutoLoja(String nome) {
+        return loja.findByNome(nome);
+    }
+
+    public Produto searchProdutoBiblioteca(String nome) {
+        return biblioteca.findByNome(nome);
+    }
+
+    public Produto searchProdutoMyGames(String nome) {
+        return myGames.findByNome(nome);
+    }
+
+    public Produto removeProdutoLoja(Produto produto) {
+        return loja.remove(produto);
+    }
+
+    public Produto removeProdutoMyGames(Produto produto) {
+        return myGames.remove(produto);
+    }
+
+    public ArrayList<Produto> listProdutosLoja() {
+        return loja.getProdutos();
+    }
+
+    public ArrayList<Produto> listProdutosBiblioteca() {
+        return biblioteca.getProdutos();
+    }
+
+    public ArrayList<Produto> listProdutosMyGames() {
+        return myGames.getProdutos();
+    }
+
+    public ArrayList<Produto> listProdutosCarrinho() {
+        return carrinho.getProdutos();
+    }
+    
+
     public boolean evaluateProduto(Produto produto) {
         return true; // Simulação da avaliação do jogo, sempre retorna verdadeiro
     }

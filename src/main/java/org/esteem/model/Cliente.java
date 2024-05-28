@@ -7,6 +7,7 @@ public class Cliente {
     private String nome;
     private Biblioteca biblioteca;
     private Biblioteca myGames;
+    private Carrinho carrinho;
 
     public Cliente(int id, String nome, Biblioteca biblioteca, Biblioteca MyGames) {
         this.id = id;
@@ -19,12 +20,14 @@ public class Cliente {
         this.nome = nome;
         this.biblioteca = biblioteca;
         this.myGames = new Biblioteca();
+        this.carrinho = new Carrinho();
     }
     public Cliente(int id, String nome) {
         this.id = id;
         this.nome = nome;
         this.biblioteca = new Biblioteca();
         this.myGames = new Biblioteca();
+        this.carrinho = new Carrinho();
     }
 
     @Override
@@ -56,6 +59,10 @@ public class Cliente {
         this.nome = nome;
     }
 
+    public void setCarrinho(Carrinho carrinho) {
+        this.carrinho = carrinho;
+    }
+
     public Biblioteca getMyGames() {
         return myGames;
     }
@@ -71,5 +78,13 @@ public class Cliente {
         Produto temp = produto;
         myGames.remove(produto);
         return temp;
+    }
+
+    public Biblioteca getBiblioteca() {
+        return biblioteca;
+    }
+
+    public Carrinho getCarrinho() {
+        return carrinho;
     }
 }

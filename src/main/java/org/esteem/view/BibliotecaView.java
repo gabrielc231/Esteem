@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import org.esteem.controller.EsteemController;
+
 
 public class BibliotecaView implements AppView {
 
@@ -48,6 +50,12 @@ public class BibliotecaView implements AppView {
         return input;
 
     }
+
+    @Override
+    public void registerController(EsteemController controller) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
     public void displayAskName() {
         System.out.println("Nome do Jogo?\n");
     }
@@ -76,6 +84,8 @@ public class BibliotecaView implements AppView {
     public void enterDevMode(){
         System.out.println("Entrando no Modo Desenvolvedor");
     }
+
+    
 }
 
 

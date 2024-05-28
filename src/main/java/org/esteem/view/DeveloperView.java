@@ -5,8 +5,84 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import org.esteem.controller.EsteemController;
+import org.esteem.model.Produto;
 
-public class DeveloperView implements AppView{
+public class DeveloperView implements AppView {
+EsteemController controller;
+    public DeveloperView() {
+        
+    }
+
+    public DeveloperView(EsteemController ec) {
+        controller = ec;
+    }
+
+    public void modoDevMenu() {
+        clearInterface();
+        while(true){
+            showOptions();
+            int input = getUserInput();
+            switch(input) {
+                case 1:
+                    clearInterface();
+                    displayAskName();
+                    String name = getDevInputName();
+                    displayAskPrice();
+                    int price = getDevInputPrice();
+                    controller.createProduto(name,price);
+                    break;
+                case 2:
+                    clearInterface();
+                    ArrayList myGames = controller.listProdutosMyGames();
+                    showMyProducts(myGames);
+                    getAnyInput();
+                    break;
+                case 3:
+                    clearInterface();
+                    while(true){
+                        displayAskNameModified();
+                        String nome = getDevInputName();
+                        Produto produto = controller.searchProdutoLoja(nome);
+                        Produto produtoMy = controller.searchProdutoMyGames(nome);
+                        switch(input){
+                            case 1:
+                                clearInterface();
+                                displayAskName();
+                                nome=getDevInputName();
+                                produto.setNome(nome);
+                                produtoMy.setNome(nome);
+                                break;
+                            case 2:
+                                clearInterface();
+                                displayAskPrice();
+                                getDevInputPrice();
+                                price=getDevInputPrice();
+                                produto.setPreco(price);
+                                produtoMy.setPreco(price);
+                                break;
+                            case 3:
+                                controller.removeProdutoLoja(produto);
+                                controller.removeProdutoMyGames(produto);
+                                break;
+                            case 4:
+                                clearInterface();
+                                return;
+                            default:
+                                clearInterface();
+                                displayInputError();
+                        }
+                    }
+                case 4:
+                    clearInterface();
+                    exitDevMode();
+                    return;
+                default:
+                    clearInterface();
+                    displayInputError();
+            }
+        }
+    }
 
     @Override
     public void clearInterface() {
@@ -21,6 +97,11 @@ public class DeveloperView implements AppView{
             System.out.println("Não pode limpar a tela");
         }
 
+    }
+
+    @Override
+    public void registerController(EsteemController ec) {
+        this.controller = ec;
     }
 
     @Override
@@ -93,6 +174,8 @@ public class DeveloperView implements AppView{
     public void exitDevMode(){
         System.out.println("Saindo do Modo Desenvolvedor");
     }
+
+    
 }
 
 

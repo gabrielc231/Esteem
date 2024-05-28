@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import org.esteem.controller.EsteemController;
+
 
 public class LojaView implements AppView {
     
@@ -22,6 +24,12 @@ public class LojaView implements AppView {
         }
 
     }
+
+    @Override
+    public void registerController(EsteemController ec) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 
     @Override
     public void showOptions() {
@@ -68,5 +76,6 @@ public class LojaView implements AppView {
     public void enterDevMode(){
         System.out.println("Entrando no Modo Desenvolvedor");
     }
+
 
 }
